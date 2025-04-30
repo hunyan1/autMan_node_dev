@@ -35,25 +35,43 @@ export class GGB1HttpAdapter extends HttpAdapter {
 		}
 		const msgType = data.Msgtype;
 		if (msgType === 49){
-			// TODO: 处理转账消息
 			const transferInfo = await this.parseXml(data.content) as any;
-			console.log(JSON.stringify(transferInfo));
-			const transferId = transferInfo.msg.appmsg[0].wcpayinfo[0].transferid[0];
-			const pay_memo = transferInfo.msg.appmsg[0].wcpayinfo[0].pay_memo[0];
-			const feedesc = transferInfo.msg.appmsg[0].wcpayinfo[0].feedesc[0] as string;
-			const amount = Number(feedesc.slice(1))
-			const transferRes = await this.ggbTransfer(data.wxid,transferId,false);
-			if (transferRes.state){
-				const result = {
-					"type": `GGB转账(${pay_memo})`,
-					"FromWxid": data.wxid,
-					"FromName": nickname,
-					"money": amount,
-					"time": this.getTimeRFC3339()
-				}
-				sendAut(result);
+			console.log(JSON.stringify(transferInfo,null,2));
+			const transferType = transferInfo.msg.appmsg[0].type[0];
+			switch (transferType){
+				case "2000":
+					const transferId = transferInfo.msg.appmsg[0].wcpayinfo[0].transferid[0];
+					const pay_memo = transferInfo.msg.appmsg[0].wcpayinfo[0].pay_memo[0];
+					const feedesc = transferInfo.msg.appmsg[0].wcpayinfo[0].feedesc[0] as string;
+					const amount = Number(feedesc.slice(1))
+					const transferRes = await this.ggbTransfer(data.wxid,transferId,false);
+					if (transferRes.state){
+						const result = {
+							"type": `GGB转账(${pay_memo})`,
+							"FromWxid": data.wxid,
+							"FromName": nickname,
+							"money": amount,
+							"time": this.getTimeRFC3339()
+						}
+						sendAut(result);
+					}
+					return
+				case "5":
+					const money = Number(transferInfo.msg.appmsg[0].mmreader[0].template_detail[0].line_content[0].topline[0].value[0].word[0].slice(1))
+					const result = {
+						"type": `GGB个人收款码或赞赏码收款`,
+						"FromWxid": data.wxid,
+						"FromName": nickname,
+						"money": money,
+						"time": this.getTimeRFC3339()
+					}
+					console.log(result)
+					sendAut(result);
+					return
+				default:
+					break;
 			}
-			return
+
 		}
 		sendAut(toAutMsg)
 	}
