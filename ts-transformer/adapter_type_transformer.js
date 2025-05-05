@@ -7,7 +7,7 @@ module.exports.adapterTypeTransformer = function (context) {
 				node.initializer?.getText() === '"__AUT_ADAPTER_TYPE__"') {
 				const sourceText = sourceFile.text;
 				const title = sourceText.match(/\/\/\s*\[title: (.*?)\]/)?.[1];
-				console.log(title)
+				// console.log(title)
 				if (!title||title.split('_').length!==3||!title.split('_')[1]){
 					throw new Error('请添加注释 [title: adapter_适配器标识_适配器类型]');
 				}

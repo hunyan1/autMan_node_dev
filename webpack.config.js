@@ -12,7 +12,7 @@ const pluginEntries = glob.sync('src/plugins/**/*.ts').reduce((acc, entry) => {
 	const name = path.basename(relativePath, '.ts');
 	// @ts-ignore
 	acc[`plugins/${name}`] = entry;
-	console.log(acc)
+	// console.log(acc)
 	return acc;
 }, {});
 
@@ -22,7 +22,7 @@ const adapterEntries = glob.sync('src/adapter/**/*.ts').reduce((acc, entry) => {
 	const name = path.basename(relativePath, '.ts');
 	// @ts-ignore
 	acc[`adapter/${name}`] = entry;
-	console.log(acc)
+	// console.log(acc)
 	return acc;
 }, {});
 
