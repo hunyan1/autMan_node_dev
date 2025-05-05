@@ -13,7 +13,7 @@ export abstract class HttpAdapter {
 	private autWs: WebSocket;
 	protected readonly adapterName: string;
 	/*
-	* GGB适配器
+	* HTTP适配器
 	* @param autPort:number autMan端口
 	* @param adapterType:string 适配器的im名称
 	* @param autProto:AutProto autMan的协议(一般有SSL填写wss://,没有SSL填写ws://)
@@ -28,11 +28,11 @@ export abstract class HttpAdapter {
 	protected abstract init():boolean|Promise<boolean>;
 
 	protected adapterOpen(){
-		console.log(`${this.adapterName} 适配器已连接`)
+		console.log(`${this.adapterName} 适配器已连接autMan`)
 	}
 
 	protected adapterClose(code: number, reason: Buffer){
-		console.log(`${this.adapterName} 适配器已断开`)
+		console.log(`${this.adapterName} 适配器已从autMan断开`)
 	}
 
 	getTimeRFC3339() {
@@ -70,7 +70,7 @@ export abstract class HttpAdapter {
 	};
 
 	protected adapterError(error: Error){
-		console.log(`${this.adapterName} 适配器连接出现错误`,error)
+		console.log(`${this.adapterName} 适配器连接autMan出现错误`,error)
 	}
 
 	/*

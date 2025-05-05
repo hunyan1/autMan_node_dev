@@ -8,6 +8,7 @@
 import {Sender} from "middleware";
 import {PluginCommon} from "../../common/PluginCommon";
 
+// 此处是类的写法
 export class Example extends PluginCommon {
 	async run(){
 		await this.sender.reply("插件示例运行,请在30秒内输入内容")
@@ -16,6 +17,7 @@ export class Example extends PluginCommon {
 	}
 }
 
+// 此处是函数的写法
 export async function example2(sender:Sender) {
 	await sender.reply("插件示例运行,请在30秒内输入内容")
 	const input = await sender.input(30000,2000)

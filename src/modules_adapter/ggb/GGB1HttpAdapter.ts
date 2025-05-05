@@ -15,7 +15,7 @@ export class GGB1HttpAdapter extends HttpAdapter {
 			baseURL:this.ggbAddr
 		})
 	}
-	protected init(): boolean | Promise<boolean> {
+	protected init(): boolean {
 		if (!this.ggbAddr){
 			return false;
 		}
@@ -142,7 +142,6 @@ export class GGB1HttpAdapter extends HttpAdapter {
 				}
 			});
 		}
-		// TODO: 处理图片、视频、文件
 
 		for (const image of images) {
 			let path = "";

@@ -7,3 +7,5 @@
  */
 
 export type AutProto = "ws://"|"wss://"
+
+export type ImWsAddress = `ws://${string}`| `wss://${string}`

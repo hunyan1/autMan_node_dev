@@ -1,12 +1,12 @@
 /**
- * @Time: 2025/3/28 21:15
+ * @Time: 2025/5/1 20:59
  * @Author: 魂焱
- * @File: adapter_ggb1_http.ts
+ * @File: adapter_qq1_ws.ts
  * @Software: WebStorm
- * @Description:
+ * @Description: 此适配器是纯翻译autMan的示例适配器 adapter_q3_ws 未测试可用性
  */
-// [title: adapter_ggb1_http]
-// [author: hunyan]
+//[title: adapter_qq1_ws]
+//[author: hunyan]
 //[language: nodejs]
 //[class: 工具类]
 //[service: 2946148573] 售后联系方式
@@ -20,20 +20,18 @@
 //[version: 0.0.1]版本号
 //[public:false] 是否发布？值为true或false，不设置则上传aut云时会自动设置为true，false时上传后不显示在市场中，但是搜索能搜索到，方便开发者测试
 //[price: 999] 上架价格
-//[description: ]
-//[param: {"required":true,"key":"Y_adapter.ggb1.addr","bool":false,"placeholder":"","name":"GGB的地址","desc":"示例：http://127.0.0.1:9420"}]
-
-import * as middleware from "middleware";
-import * as console from "node:console";
-import {GGB1HttpAdapter} from "../../modules_adapter/ggb/GGB1HttpAdapter";
-
+//[description: 示例插件]
+// [param: {"required":true,"key":"Y_adapter.qq1.addr","bool":false,"placeholder":"","name":"正向ws的地址","desc":"示例：ws://127.0.0.1:3001"}]
 // 固定写法，编译的时候会将__AUT_ADAPTER_TYPE__替换为头部注释中 title: adapter_ggb1_http 的ggb1
+
+import middleware from "middleware";
+import { QQ1WsAdapter } from "../../modules_adapter/qq1/QQ1WsAdapter";
 const adapterType = "__AUT_ADAPTER_TYPE__";
 
 (async ()=>{
 	const autPort = await middleware.port();
-	const ggbAddr = await middleware.bucketGet("Y_adapter.ggb1", "addr");
-	const adapter = new GGB1HttpAdapter(Number(autPort), adapterType,ggbAddr,"ws://");
+	const qq1Addr = await middleware.bucketGet("Y_adapter.qq1", "addr");
+	const adapter = new QQ1WsAdapter(qq1Addr,Number(autPort), adapterType,"ws://");
 	adapter.run().catch((e)=>{
 		console.log(e);
 	})
