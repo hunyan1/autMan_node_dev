@@ -18,7 +18,7 @@ export abstract class HttpAdapter {
 	* @param adapterType:string 适配器的im名称
 	* @param autProto:AutProto autMan的协议(一般有SSL填写wss://,没有SSL填写ws://)
 	* */
-	protected constructor(autPort:number, adapterType:string, autProto:AutProto="ws://") {
+	constructor(autPort:number, adapterType:string, autProto:AutProto="ws://") {
 		this.adapterName = adapterType
 		this.autAddr = `${autProto}127.0.0.1:${autPort}/${adapterType}/adapter`
 		this.autWs = new WebSocket(this.autAddr)

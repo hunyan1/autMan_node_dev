@@ -8,7 +8,7 @@
 import {HttpAdapter} from "../../common/HttpAdapter";
 
 // 反向ws的逻辑与http相同，im消息都是从autMan处过来，只是http适配器需要作者通过http请求发送给im，ws适配器则不需要，直接发送给autMan即可
-class QQ2WsrAdapter extends HttpAdapter {
+export class QQ2WsrAdapter extends HttpAdapter {
 	protected init(): boolean {
 		return true
 	}
