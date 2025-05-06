@@ -43,3 +43,5 @@
     cd autMan_node_dev
     npm install
 ```
+
+简单开箱 https://www.hunyan6.cn/899/
